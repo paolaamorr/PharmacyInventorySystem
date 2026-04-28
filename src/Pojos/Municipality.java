@@ -47,7 +47,7 @@ public class Municipality {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", province='" + province + '\'' +
-                '}';
+                '}¿';
     }
 	
 	
