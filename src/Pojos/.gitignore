@@ -1,3 +1,10 @@
 /Role.class
 /User.class
 /Municipality.class
+/Pharmacy.class
+/Supplier.class
+/Medication.class
+/Inventory.class
+/Purchase.class
+/Order.class
+/Client.class
