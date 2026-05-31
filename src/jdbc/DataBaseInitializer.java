@@ -42,7 +42,7 @@ public class DataBaseInitializer {
             "id TEXT PRIMARY KEY, " +
             "name TEXT NOT NULL UNIQUE)",
             
-            // Medication (Corregido: target_illness y prescription)
+            // Medication 
             "CREATE TABLE IF NOT EXISTS Medication ( " +
             "id TEXT PRIMARY KEY, " + 
             "name TEXT NOT NULL UNIQUE, " + 
@@ -50,7 +50,7 @@ public class DataBaseInitializer {
             "ss BOOLEAN NOT NULL, " + 
             "prescription BOOLEAN NOT NULL)", 
             
-            // Supplier (Corregido: errores de comillas y campos duplicados)
+            // Supplier 
             "CREATE TABLE IF NOT EXISTS Supplier (" +
             "id TEXT PRIMARY KEY, " +
             "name TEXT NOT NULL, " +
@@ -65,7 +65,7 @@ public class DataBaseInitializer {
             "municipalityId TEXT, " +
             "FOREIGN KEY(municipalityId) REFERENCES Municipality(id))",
             
-            // Pharmacy (Corregido: duplicidades eliminadas)
+            // Pharmacy 
             "CREATE TABLE IF NOT EXISTS Pharmacy (" + 
             "id TEXT PRIMARY KEY, " +
             "address TEXT, " +
@@ -103,7 +103,7 @@ public class DataBaseInitializer {
             "FOREIGN KEY(pharmacyId) REFERENCES Pharmacy(id), " +
             "FOREIGN KEY(medicationId) REFERENCES Medication(id))",
             
-            // Orders (Corregido: Nombre cambiado de Order a Orders)
+            // Order
             "CREATE TABLE IF NOT EXISTS Orders (" +
             "id TEXT PRIMARY KEY, " +
             "pharmacyId TEXT, " +

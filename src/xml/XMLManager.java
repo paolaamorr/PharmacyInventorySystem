@@ -27,10 +27,8 @@ public class XMLManager {
 			JAXBContext context = JAXBContext.newInstance(MedicationList.class);
 			Marshaller marshaller = context.createMarshaller();
 
-			// xml legible
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-			// Metemos la lista de la base de datos en nuestro Wrapper
 			MedicationList medicationList = new MedicationList(medications);
 
 			marshaller.marshal(medicationList, new File(fileName));

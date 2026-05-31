@@ -1,7 +1,6 @@
 package interfaces;
 
 public interface HistoryManager {
-	// For use case 9:
 
 	/**
 	 * Shows the history of operations for a specific pharmacy.

@@ -15,11 +15,11 @@ import java.util.List;
 
 
 public class JPAUserManager implements UserManager {
-	//como connection en JDBC
+	// Like the connection in JDBC
 	private EntityManager em;
 	
 	public JPAUserManager() {
-		//mismo nombre que en el persistence
+
 		this.em = Persistence.createEntityManagerFactory("pharmacy-unit").createEntityManager();
 		
 		em.getTransaction().begin();
@@ -47,14 +47,13 @@ public class JPAUserManager implements UserManager {
 			Role managedRole = em.merge(role);
 			user.setRole(managedRole);
 			
-			em.persist(user); // Guarda el usuario (y si es un Client, guarda sus datos extra)
+			em.persist(user); // Saves the user
 			em.getTransaction().commit(); 
 			
 	
 		
 		}catch (Exception e) {
-			//Si vas a crear un usuario y, por ejemplo, se corta la conexión a internet justo cuando el nombre se ha guardado 
-			//pero la contraseña no, el rollback() borra ese nombre.
+			//f you create a user and by X reasons, the password is not created, rollback() eliminates the username 
 			if (em.getTransaction().isActive()) 
 				em.getTransaction().rollback();
 			e.printStackTrace();
@@ -130,7 +129,7 @@ public class JPAUserManager implements UserManager {
 	public void updateUser(User user) {
 		try {
 			em.getTransaction().begin();
-			em.merge(user); // 'merge' busca el ID y actualiza el resto de campos
+			em.merge(user); // 'merge' search the ID and actualize the rest 
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			if (em.getTransaction().isActive()) em.getTransaction().rollback();
@@ -144,7 +143,6 @@ public class JPAUserManager implements UserManager {
 	public void delateUser(Integer id) {
 		try {
 			em.getTransaction().begin();
-			// primero hay que encontrar el objeto para borrarlo
 			User user = em.find(User.class, id);
 			if (user != null) {
 				em.remove(user);
@@ -166,7 +164,7 @@ public class JPAUserManager implements UserManager {
 	        em.getTransaction().begin();
 	        User managedUser = em.find(User.class, user.getUserId());
 	        if (managedUser != null) {
-	            managedUser.setPassword(hashedPassword); // Guardar siempre encriptado
+	            managedUser.setPassword(hashedPassword); // Encripted
 	            user.setPassword(hashedPassword);
 	        }
 	        em.getTransaction().commit();

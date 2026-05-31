@@ -32,7 +32,6 @@ public class MedicationList {
         this.medications = medications;
     }
 
-    // Getters y Setters
 
 	/**
 	 * Gets the Medications.

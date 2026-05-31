@@ -162,7 +162,7 @@ public class Main {
 	
 	 private static void createInitialAdmin() {
 			try {
-				// 1. Aseguramos que el rol 'admin' exista delegando en tu manager
+				// 1. Ensures that the role 'admin' exists
 				Role adminRole = roleManager.findRoleByName("admin");
 				if (adminRole == null) {
 					System.out.println("Creating 'admin' role structure...");
@@ -172,7 +172,7 @@ public class Main {
 					adminRole = roleManager.findRoleByName("admin");
 				}
 				
-				// 2. Aseguramos que el rol 'pharmacist' exista también
+				// 2. Ensures that the role 'pharmacist' exists
 				Role pharmacistRole = roleManager.findRoleByName("pharmacist");
 				if (pharmacistRole == null) {
 					System.out.println("Creating 'pharmacist' role structure in startup...");
@@ -182,7 +182,7 @@ public class Main {
                     pharmacistRole = roleManager.findRoleByName("pharmacist");
 				}
 				
-				// 3. Creamos tu usuario administrador si no existe
+				// 3. Create an initial default admin
 				User checkUser = userManager.login("andrea.123", "1234");
 				if (checkUser == null) {
 					System.out.println("Creating default administrator 'andrea.123'...");
@@ -190,7 +190,7 @@ public class Main {
 					System.out.println("Administrator setup complete!");
 				}
 
-                // 4. Creamos un usuario pharmacist por defecto si no existe
+                // 4. Create an initial default pharmacist if it does not exist
                 User checkPharmacist = userManager.login("pharmacist.test", "1234");
                 if (checkPharmacist == null) {
                     System.out.println("Creating default pharmacist 'pharmacist.test'...");
@@ -1314,37 +1314,41 @@ public class Main {
 	        while (!back) {
 	            System.out.println("\n USER MANAGEMENT");
 	            System.out.println("1. Create pharmacist user");
-	            System.out.println("2. Search user by username");
-	            System.out.println("3. Show all users");
-	            System.out.println("4. Update password");
-	            System.out.println("5. Delete user");
-	            System.out.println("6. Back");
+	            System.out.println("2. Create admin user");
+	            System.out.println("3. Search user by username");
+	            System.out.println("4. Show all users");
+	            System.out.println("5. Update password");
+	            System.out.println("6. Delete user");
+	            System.out.println("7. Back");
 
 	            System.out.print("Choose an option: ");
 	            int option = readInt();
 
 	            switch (option) {
 	                case 1:
-	                    createPharmacistUser(); // AYUDA CON ESTE
+	                    createPharmacistUser(); 
 	                    break;
 
 	                case 2:
+	                	createAdminUser();
+	                	break;
+	                case 3:
 	                    findUserByUsername();
 	                    break;
 
-	                case 3:
+	                case 4:
 	                    showAllUsers();
 	                    break;
-
-	                case 4:
+	                    
+	                case 5: 
 	                    updatePassword();
 	                    break;
 
-	                case 5:
+	                case 6:
 	                    deleteUser();
 	                    break;
 
-	                case 6:
+	                case 7:
 	                    back = true;
 	                    break;
 
@@ -1365,7 +1369,6 @@ public class Main {
 	        System.out.print("Username: ");
 	        String username = reader.readLine();
 
-	        // 1. Validar si el nombre de usuario ya existe
 	        if (userManager.findUserByUserName(username) != null) {
 	            System.out.println("Username already exists.");
 	            return;
@@ -1374,14 +1377,12 @@ public class Main {
 	        System.out.print("Password: ");
 	        String password = reader.readLine();
 
-	        // 2. Buscar el rol pharmacist en la base de datos
 	        Role pharmacistRole = roleManager.findRoleByName("pharmacist");
 	        if (pharmacistRole == null) {
 	            System.out.println("Role 'pharmacist' does not exist in the database. Please contact admin.");
 	            return;
 	        }
 
-	        // 3. Crear el usuario delegando directamente en tu manager
 	        try {
 	            System.out.println("Saving new pharmacist '" + username + "' into database...");
 	            userManager.createUser(username, password, pharmacistRole);
@@ -1389,6 +1390,36 @@ public class Main {
 	        } catch (Exception e) {
 	            System.out.println("Error creating pharmacist user: " + e.getMessage());
 	        } 
+	    }
+	    
+	    
+	    private static void createAdminUser() throws IOException {
+	    	System.out.print("Username: ");
+	        String username = reader.readLine();
+
+	        if (userManager.findUserByUserName(username) != null) {
+	            System.out.println("Username already exists.");
+	            return;
+	        }
+	        
+	        System.out.print("Password: ");
+	        String password = reader.readLine();
+	        
+	        Role adminRole = roleManager.findRoleByName("admin");
+	        if (adminRole == null) {
+	            System.out.println("Role 'admin' does not exist in the database. Please contact a superior.");
+	            return;
+	        }
+	        
+	        try {
+	        	userManager.createUser(username, password, adminRole);
+	            System.out.println("Pharmacist user '" + username + "' created successfully!");
+
+	        } catch(Exception e) {
+	            System.out.println("Error creating pharmacist user: " + e.getMessage());
+
+	        }
+	    	
 	    }
 	    /**
 

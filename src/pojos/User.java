@@ -25,7 +25,7 @@ public class User implements Serializable {
 	private String username;
 	
 	@Column(name = "password", nullable = false)
-	@XmlTransient //evita que la contraseÃ±a se guarde en XML
+	@XmlTransient // avoids that the password is saved in XML
 	private String password;
 	
 	@ManyToOne 

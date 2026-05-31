@@ -15,7 +15,7 @@ import pojos.*;
 public class PharmacyWrapper {
 	
 	@XmlElementWrapper(name = "medications")
-    @XmlElement(name = "medication") //este nombre tiene que coincides con el de los pojos 
+    @XmlElement(name = "medication") 
     private List<Medication> medications = new ArrayList<>();
 
     @XmlElementWrapper(name = "suppliers")

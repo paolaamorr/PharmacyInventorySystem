@@ -31,7 +31,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
         String sql = "SELECT * FROM Pharmacy WHERE registrationNumber = ?";
         Pharmacy pharmacy = null;
 
-        // Using try-with-resources to ensure PreparedStatement and ResultSet are closed
+        // Try-with-resources to ensure PreparedStatement and ResultSet are closed
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, number);
 
