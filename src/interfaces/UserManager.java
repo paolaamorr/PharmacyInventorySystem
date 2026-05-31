@@ -50,7 +50,7 @@ public interface UserManager {
 	 *
 	 * @param id the ID of the user to delete
 	 */
-	void delateUser(Integer id);
+	void deleteUser(Integer id);
 	
 	/**
 	 * Updates the password for a specific user.

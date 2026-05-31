@@ -1,6 +1,7 @@
 package xml;
 
 import java.io.File;
+
 import java.util.List;
 
 import javax.xml.bind.*;
@@ -12,8 +13,10 @@ import javax.xml.validation.Validator;
 
 import pojos.Medication;
 import pojos.Supplier;
+import interfaces.XMLInterface;
 
-public class XMLManager {
+
+public class XMLManager implements XMLInterface{
 
 	/**
 	 * Exports a list of medications to an XML file.
@@ -21,6 +24,7 @@ public class XMLManager {
 	 * @param medications the list of medications
 	 * @param fileName    the output file name
 	 */
+	@Override 
 	public void exportMedications(List<Medication> medications, String fileName) {
 		try {
 
@@ -46,6 +50,7 @@ public class XMLManager {
 	 * @param fileName the XML file name
 	 * @return the list of imported medications
 	 */
+	@Override
 	public List<Medication> importMedications(String fileName) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(MedicationList.class);
@@ -68,6 +73,7 @@ public class XMLManager {
 	 * @param suppliers the list of suppliers
 	 * @param fileName  the output file name
 	 */
+	@Override
 	public void exportSuppliers(List<Supplier> suppliers, String fileName) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(SupplierList.class);
@@ -92,6 +98,7 @@ public class XMLManager {
 	 * @param fileName the XML file name
 	 * @return the list of imported suppliers
 	 */
+	@Override
 	public List<Supplier> importSuppliers(String fileName) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(SupplierList.class);
@@ -113,6 +120,7 @@ public class XMLManager {
 	 * @param project  the PharmacyWrapper containing all data
 	 * @param fileName the output file name
 	 */
+	@Override
 	public void exportWholeDatabase(PharmacyWrapper project, String fileName) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(PharmacyWrapper.class);
@@ -136,6 +144,7 @@ public class XMLManager {
 	 * @param fileName the XML file name
 	 * @return the PharmacyWrapper containing all imported data
 	 */
+	@Override
 	public PharmacyWrapper importWholeDatabase(String fileName) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(PharmacyWrapper.class);
@@ -153,6 +162,7 @@ public class XMLManager {
 	 * @param xmlFile the path to the XML file
 	 * @param xsdFile the path to the XSD file
 	 */
+	@Override
 	public void validateXML(String xmlFile, String xsdFile) {
 		try {
 			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
