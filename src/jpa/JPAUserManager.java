@@ -140,7 +140,7 @@ public class JPAUserManager implements UserManager {
      * {@inheritDoc}
      */
     @Override
-	public void delateUser(Integer id) {
+	public void deleteUser(Integer id) {
 		try {
 			em.getTransaction().begin();
 			User user = em.find(User.class, id);

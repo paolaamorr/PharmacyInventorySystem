@@ -1510,7 +1510,7 @@ public class Main {
 	        System.out.print("User ID: ");
 	        int id = readInt();
 
-	        userManager.delateUser(id);
+	        userManager.deleteUser(id);
 
 	        System.out.println("User deleted.");
 	    }
